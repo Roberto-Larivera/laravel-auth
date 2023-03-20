@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+// Requests
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+
+// Models
 use App\Models\Project;
+
 
 class ProjectController extends Controller
 {
@@ -15,7 +19,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::all();
+        return view('admin.projects.index',[
+            'projects' => $projects
+        ]);
     }
 
     /**

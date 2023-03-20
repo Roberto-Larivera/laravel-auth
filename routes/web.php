@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ Route::get('/', function () {
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function (){
     Route::get('/dashboard', [PageController::class, 'dashboard'] )->name('dashboard');
+    Route::resource('projects', ProjectController::class);
 });
 
 

@@ -30,10 +30,10 @@
                             <td>{{ $project ->title }}</td>
                             <td>{{ $project ->name_repo }}</td>
                             <td>
-                                <a href="#" class="btn btn-outline-primary">
+                                <a href="{{ route('admin.projects.show',$project->id) }}" class="btn btn-outline-primary">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
-                                <a href="#" class="btn btn-outline-warning">
+                                <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-outline-warning">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 {{-- @include('admin.projects.partials.delete') --}}

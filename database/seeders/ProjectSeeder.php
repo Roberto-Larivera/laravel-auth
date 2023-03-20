@@ -37,7 +37,8 @@ class ProjectSeeder extends Seeder
                 'title' => $title,
                 'slug' => str::slug($title),
                 'name_repo' => str::slug($title),
-                'link_repo' => $faker->imageUrl(640, 480, 'animals', true),
+                'link_repo' => $faker->url(),
+                'img_repo' => $faker->imageUrl(640, 480, 'animals', true),
                 'description' => $faker->unique()->paragraph(),
             ]);
             

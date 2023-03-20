@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('slug',98);
             $table->string('name_repo',98);
             $table->string('link_repo');
+            $table->string('img_repo');
             $table->text('description')->nullable();
 
             $table->timestamps();

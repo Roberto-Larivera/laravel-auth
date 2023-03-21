@@ -26,16 +26,15 @@
 
 <body>
     <style>
-        main {
-            height: calc(100vh - var(--header-height));
-            /* altri stili per il main */
+        header{
+            z-index: 10;
         }
     </style>
     @yield('body_css')
 
     <div id="app">
 
-        <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-2 shadow">
+        <header class="navbar navbar-dark position-sticky top-0 bg-dark flex-md-nowrap p-2 shadow">
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/">Boolfolio</a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button"
                 data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
@@ -57,8 +56,8 @@
             </div>
         </header>
 
-        {{-- <div class="container-fluid vh-100"> --}}
-        <div class="container-fluid">
+        <div class="container-fluid vh-100">
+        {{-- <div class="container-fluid"> --}}
             <div class="row h-100">
                 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark navbar-dark sidebar collapse">
                     <div class="position-sticky pt-3">
@@ -89,11 +88,11 @@
 
     </div>
     @yield('body_js')
-    <script>
+    {{-- <script>
         const header = document.querySelector('header');
         const headerHeight = header.offsetHeight;
         document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
-    </script>
+    </script> --}}
 </body>
 
 </html>

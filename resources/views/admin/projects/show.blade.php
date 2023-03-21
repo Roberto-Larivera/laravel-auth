@@ -10,7 +10,10 @@
                
             </div>
             <div class="col">
-                <a href="{{ route('admin.projects.index') }}" class="btn btn-primary">Indietro</a>
+                <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-primary">
+                    Torna Indietro
+                    <i class="fa-solid fa-rotate-left"></i>
+                </a>
                 <a href="{{ route('admin.projects.show', $project->id) }}"
                     class="btn btn-outline-primary">
                     <i class="fa-solid fa-eye"></i>

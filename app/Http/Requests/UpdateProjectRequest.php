@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+// Helpers
+use Illuminate\Validation\Rule;
+
 class UpdateProjectRequest extends FormRequest
 {
     /**
@@ -13,7 +16,7 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +27,15 @@ class UpdateProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|max:98',
+            'name_repo' => [
+                'required',
+                Rule::unique('projects')->ignore($this->project->id),
+                'max:98'
+            ],
+            'link_repo' => 'required|max:255',
+            'img_repo' => 'nullable|max:255',
+            'description' => 'nullable|max:4096',
         ];
     }
 }

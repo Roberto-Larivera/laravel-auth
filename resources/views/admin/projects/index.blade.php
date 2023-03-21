@@ -2,11 +2,15 @@
 @section('head-title','Projects  | ')
 @section('content')
     <div class="container-fluid mt-4">
-        <div class="row">
+        <div class="row mb-5">
             <div class="col">
                 <h1>
                     Tutti i Projects
                 </h1>
+                <a href="#" class="btn btn-outline-success">
+                    Aggiungi Progetto
+                    <i class="fa-solid fa-plus"></i>
+                </a>
             </div>
         </div>
         <div class="row">

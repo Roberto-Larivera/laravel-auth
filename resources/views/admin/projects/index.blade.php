@@ -7,7 +7,7 @@
                 <h1>
                     Tutti i Projects
                 </h1>
-                <a href="#" class="btn btn-outline-success">
+                <a href="{{ route('admin.projects.create') }}" class="btn btn-outline-primary">
                     Aggiungi Progetto
                     <i class="fa-solid fa-plus"></i>
                 </a>

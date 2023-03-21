@@ -80,7 +80,7 @@
                         </p>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-success mb-3">Confirm</button>
+                        <button type="submit" class="btn btn-success mb-3">Conferma</button>
                     </div>
                 </form>
             </div>

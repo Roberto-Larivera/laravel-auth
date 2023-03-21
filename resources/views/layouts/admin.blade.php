@@ -26,7 +26,7 @@
 
 <body>
     <style>
-        header{
+        header {
             z-index: 10;
         }
     </style>
@@ -57,7 +57,7 @@
         </header>
 
         <div class="container-fluid vh-100">
-        {{-- <div class="container-fluid"> --}}
+            {{-- <div class="container-fluid"> --}}
             <div class="row h-100">
                 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark navbar-dark sidebar collapse">
                     <div class="position-sticky pt-3">
@@ -68,11 +68,34 @@
                                     <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> Dashboard
                                 </a>
                             </li>
+                        </ul>
+                        <h6 class="text-white mt-4 mb-2">
+                            Gestione Progetti
+                        </h6>
+                        <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.projects.index' ? 'bg-secondary' : '' }}"
                                     href="{{ route('admin.projects.index') }}">
                                     <i class="fa-solid fa-folder fa-lg fa-fw"></i> Projects
                                 </a>
+                            </li>
+                        </ul>
+                        <h6 class="text-white mt-4 mb-2">
+                            Gestione Profilo
+                        </h6>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'profile' ? 'bg-secondary' : '' }}"  href="{{ url('profile') }}">{{ __('Profile') }}</a>
+                                <a class="nav-link text-white" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
 

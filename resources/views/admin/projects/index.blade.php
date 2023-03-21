@@ -13,6 +13,9 @@
                 </a>
             </div>
         </div>
+        @include('admin.projects.partials.warning')
+        @include('admin.projects.partials.success')
+        @include('admin.projects.partials.errors')
         <div class="row">
             <div class="col">
                 <table class="table">

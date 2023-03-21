@@ -7,7 +7,6 @@
                 <h1>
                     Modifica Progetto | {{ $project->id }}
                 </h1>
-               
             </div>
             <div class="col">
                 <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-primary">
@@ -21,22 +20,9 @@
                 @include('admin.projects.partials.delete')
             </div>
         </div>
-        @if ($errors->any())
-
-            <div class="row mb-5">
-                <div class="col">
-                    <div class="alert alert-danger">
-                        <ul class="m-0">
-                            @foreach ($errors->all() as $error)
-                                <li>
-                                    {{ $error }}
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        @endif
+       @include('admin.projects.partials.warning')
+       @include('admin.projects.partials.success')
+       @include('admin.projects.partials.errors')
         <div class="row">
             <div class="col">
 

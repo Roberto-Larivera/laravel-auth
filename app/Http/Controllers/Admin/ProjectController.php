@@ -100,7 +100,7 @@ class ProjectController extends Controller
         }
 
         $newProject = Project::create($data);
-        return redirect()->route('admin.projects.show', $newProject);
+        return redirect()->route('admin.projects.show', $newProject)->with('success', 'Progetto creato con successo');
     }
 
 
@@ -197,7 +197,7 @@ class ProjectController extends Controller
                     $counter++;
                     $existSlug = Project::where('slug', $data['slug'])->first();
                 }
-                dd($data);
+                
             }
     
             $project->update($data);

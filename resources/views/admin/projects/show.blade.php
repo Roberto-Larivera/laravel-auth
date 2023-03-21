@@ -7,7 +7,6 @@
                 <h1>
                     {{ $project->id }} - {{ $project->title }}
                 </h1>
-               
             </div>
             <div class="col">
                 <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-primary">
@@ -20,6 +19,9 @@
                 @include('admin.projects.partials.delete')
             </div>
         </div>
+        @include('admin.projects.partials.warning')
+        @include('admin.projects.partials.success')
+        @include('admin.projects.partials.errors')
         <div class="row">
             <div class="col">
                 <div class="card">
@@ -29,11 +31,11 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body h-100">
-                                    <h5 class="card-title">Titolo: {{ $project->title }}</h5>
-                                    <p class="card-text">Slug: {{ $project->slug }}</p>
-                                    <p class="card-text">Nome Repo: {{ $project->name_repo }}</p>
-                                    <p class="card-text">Link Repo: {{ $project->link_repo }}</p>
-                                    <p class="card-text">Descrizione: {{ $project->description }}</p>
+                                <h5 class="card-title">Titolo: {{ $project->title }}</h5>
+                                <p class="card-text">Slug: {{ $project->slug }}</p>
+                                <p class="card-text">Nome Repo: {{ $project->name_repo }}</p>
+                                <p class="card-text">Link Repo: {{ $project->link_repo }}</p>
+                                <p class="card-text">Descrizione: {{ $project->description }}</p>
                             </div>
                         </div>
                     </div>

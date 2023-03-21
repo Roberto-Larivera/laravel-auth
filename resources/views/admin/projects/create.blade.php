@@ -16,7 +16,8 @@
         <div class="row">
             <div class="col">
                
-                <form action="">
+                <form action="{{ route('admin.projects.store') }}" method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input 

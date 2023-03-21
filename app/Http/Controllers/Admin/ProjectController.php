@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 // Requests
 use App\Http\Requests\StoreProjectRequest;
@@ -8,6 +10,9 @@ use App\Http\Requests\UpdateProjectRequest;
 
 // Models
 use App\Models\Project;
+
+// Helpers
+use Illuminate\Support\Str;
 
 
 class ProjectController extends Controller
@@ -46,7 +51,27 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['title']);
+        $existSlug = Project::where('slug', $data['slug'])->first();
+
+        $counter = 1;
+        $dataSlug =$data['slug'];
+
+        // Aggiungere la possibilità di rimuovere gli spazzi se ci sono e inserire dei trattini, name-repo
+        
+        // questa funzione controlla se lo slag esiste già nel database, e in caso esista con questo ciclo while li viene inserito un numero di continuazione 
+        while($existSlug){
+            if(strlen($data['slug']) >= 95){
+                substr($data['slug'], 0, strlen($data['slug']) - 3);
+            }
+            $data['slug'] = $dataSlug.'-'.$counter;
+            $counter++;
+            $existSlug = Project::where('slug', $data['slug'])->first();
+        }
+
+        $newProject = Project::create($data);
+        return redirect()->route('admin.projects.show', $newProject);
     }
 
     /**

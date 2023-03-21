@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             
             $table->string('title',98);
-            $table->string('slug',98);
-            $table->string('name_repo',98);
+            $table->string('slug',98)->unique();
+            $table->string('name_repo',98)->unique();
             $table->string('link_repo');
-            $table->string('img_repo');
+            $table->string('img_repo')->nullable();
             $table->text('description')->nullable();
 
             $table->timestamps();

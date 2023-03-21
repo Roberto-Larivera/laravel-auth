@@ -14,13 +14,10 @@
                     Torna Indietro
                     <i class="fa-solid fa-rotate-left"></i>
                 </a>
-                <a href="{{ route('admin.projects.show', $project->id) }}"
-                    class="btn btn-outline-primary">
-                    <i class="fa-solid fa-eye"></i>
-                </a>
                 <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-outline-warning">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
+                @include('admin.projects.partials.delete')
             </div>
         </div>
         <div class="row">

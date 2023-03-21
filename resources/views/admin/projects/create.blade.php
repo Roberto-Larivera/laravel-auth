@@ -2,11 +2,14 @@
 @section('head-title', 'Create | ')
 @section('content')
     <div class="container-fluid mt-4">
-        <div class="row mb-5">
+        <div class="row row-cols-1 mb-5">
             <div class="col">
                 <h1>
                     Aggiungi Progetto
                 </h1>
+               
+            </div>
+            <div class="col">
                 <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-primary">
                     Torna Indietro
                     <i class="fa-solid fa-rotate-left"></i>

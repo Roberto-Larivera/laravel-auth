@@ -2,15 +2,23 @@
 @section('head-title', 'Create | ')
 @section('content')
     <div class="container-fluid mt-4">
-        <div class="row mb-5">
+        <div class="row row-cols-1 mb-5">
             <div class="col">
                 <h1>
-                    Modifica Progetto
+                    Modifica Progetto | {{ $project->id }}
                 </h1>
+               
+            </div>
+            <div class="col">
                 <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-primary">
                     Torna Indietro
                     <i class="fa-solid fa-rotate-left"></i>
                 </a>
+                <a href="{{ route('admin.projects.show', $project->id) }}"
+                    class="btn btn-outline-primary">
+                    <i class="fa-solid fa-eye"></i>
+                </a>
+                @include('admin.projects.partials.delete')
             </div>
         </div>
         @if ($errors->any())

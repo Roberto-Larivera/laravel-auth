@@ -201,7 +201,7 @@ class ProjectController extends Controller
             }
     
             $project->update($data);
-            return redirect()->route('admin.projects.show', $project)->with('success', 'Progetto aggiornato con successo');;
+            return redirect()->route('admin.projects.show', $project)->with('success', 'Progetto aggiornato con successo');
             
         }
         
@@ -219,6 +219,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        //$project = Project::findOrFail($project);
+        $project->delete($project);
+        return redirect()->route('admin.projects.index')->with('success', 'Il Progetto è stato eliminato con successo');
+
     }
 }

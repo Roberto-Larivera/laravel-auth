@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('head-title','Create  | ')
+@section('head-title', 'Create | ')
 @section('content')
     <div class="container-fluid mt-4">
         <div class="row mb-5">
@@ -13,59 +13,73 @@
                 </a>
             </div>
         </div>
+        @if ($errors->any())
+
+            <div class="row mb-5">
+                <div class="col">
+                    <div class="alert alert-danger">
+                        <ul class="m-0">
+                            @foreach ($errors->all() as $error)
+                                <li>
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="row">
             <div class="col">
-               
+
                 <form action="{{ route('admin.projects.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input 
-                        type="text" 
-                        class="form-control" 
-                        id="title" 
-                        name="title" 
-                        placeholder="Example Title">
-                      </div>
+                        <label for="title" class="form-label  @error('title') text-danger @enderror ">Title</label>
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                            name="title" placeholder="Example Title" maxlength="98" required>
+                        @error('title')
+                            <p class="text-danger fw-bold">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="mb-3">
-                        <label for="name_repo" class="form-label">Name Repo</label>
-                        <input 
-                        type="text" 
-                        class="form-control" 
-                        id="name_repo" 
-                        name="name_repo" 
-                        placeholder="example-name-repo">
-                      </div>
+                        <label for="name_repo" class="form-label  @error('name_repo') text-danger @enderror">Name
+                            Repo</label>
+                        <input type="text" class="form-control @error('name_repo') is-invalid @enderror" id="name_repo"
+                            name="name_repo" placeholder="example-name-repo" maxlength="98" required>
+                        @error('name_repo')
+                            <p class="text-danger fw-bold">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="mb-3">
-                        <label for="link_repo" class="form-label">Link Repo</label>
-                        <input 
-                        type="text" 
-                        class="form-control" 
-                        id="link_repo" 
-                        name="link_repo" 
-                        placeholder="https://github.com/Example-link/name-repo">
-                      </div>
+                        <label for="link_repo" class="form-label  @error('link_repo') text-danger @enderror">Link
+                            Repo</label>
+                        <input type="text" class="form-control @error('link_repo') is-invalid @enderror" id="link_repo"
+                            name="link_repo" placeholder="https://github.com/Example-link/name-repo" maxlength="255" required>
+                        @error('link_repo')
+                            <p class="text-danger fw-bold">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="mb-3">
-                        <label for="img_repo" class="form-label">Img Repo</label>
-                        <input 
-                        type="text" 
-                        class="form-control" 
-                        id="img_repo" 
-                        name="img_repo" 
-                        placeholder="https://placehold.co/example">
-                      </div>
-                      <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea 
-                        class="form-control" 
-                        id="description" 
-                        name="description"
-                        placeholder="Lorem ipsum dolor sit amet ..."
-                        rows="3"></textarea>
-                      </div>
-                      <div>
+                        <label for="img_repo" class="form-label  @error('img_repo') text-danger @enderror">Img Repo</label>
+                        <input type="text" class="form-control @error('img_repo') is-invalid @enderror" id="img_repo"
+                            name="img_repo" placeholder="https://placehold.co/example" maxlength="255" >
+                        @error('img_repo')
+                            <p class="text-danger fw-bold">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="description"
+                            class="form-label  @error('description') text-danger @enderror">Description</label>
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                            placeholder="Lorem ipsum dolor sit amet ..." rows="3" maxlength="4096"></textarea>
+                        @error('description')
+                            <p class="text-danger fw-bold">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
                         <button type="submit" class="btn btn-success mb-3">Confirm</button>
-                      </div>
+                    </div>
                 </form>
             </div>
         </div>

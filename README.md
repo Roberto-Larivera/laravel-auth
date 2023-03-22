@@ -1,6 +1,6 @@
 # Laravel Boolfolio - Base
 
-## Giorno 1
+## Giorno 1&2
 
 ## Descrizione
 Ripercorriamo gli steps fatti a lezione ed iniziamo un nuovo progetto usando laravel breeze per l'autenticazione (utilizziamo il template con Bootstrap).

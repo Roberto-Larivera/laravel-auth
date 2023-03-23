@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\Admin\ProjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/projects', [GuestController::class, 'projects']);
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function (){
     Route::get('/dashboard', [PageController::class, 'dashboard'] )->name('dashboard');

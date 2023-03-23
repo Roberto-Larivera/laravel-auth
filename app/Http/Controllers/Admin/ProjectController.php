@@ -13,6 +13,7 @@ use App\Models\Project;
 
 // Helpers
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProjectController extends Controller
@@ -81,6 +82,14 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $data = $request->validated();
+
+        if(array_key_exists('featured_image', $data)){
+            $imgPath = Storage::put('projects', $data['featured_image']);
+            $data['featured_image'] = $imgPath;
+        }
+
+
+
         $data['slug'] = Str::slug($data['title']);
         $existSlug = Project::where('slug', $data['slug'])->first();
 

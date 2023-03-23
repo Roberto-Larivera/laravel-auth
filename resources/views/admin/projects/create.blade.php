@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col">
 
-                <form action="{{ route('admin.projects.store') }}" method="POST">
+                <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data" >
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label  @error('title') text-danger @enderror ">Title <span class="text-danger fw-bold">*</span></label>
@@ -65,10 +65,14 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="img_repo" class="form-label  @error('img_repo') text-danger @enderror">Img Repo</label>
-                        <input type="text" class="form-control @error('img_repo') is-invalid @enderror" id="img_repo"
-                            name="img_repo" placeholder="https://placehold.co/example" maxlength="255" value="{{ old('img_repo') }}">
-                        @error('img_repo')
+                        <label for="featured_image" class="form-label  @error('featured_image') text-danger @enderror">Featured Image</label>
+                        <input type="file" class="form-control @error('featured_image') is-invalid @enderror" id="featured_image"
+                            name="featured_image"
+                            {{-- validazione frontend da aggiungere --}}
+                            {{-- si usa per i file --}}
+                            accept="image/*"
+                            >
+                        @error('featured_image')
                             <p class="text-danger fw-bold">{{ $message }}</p>
                         @enderror
                     </div>

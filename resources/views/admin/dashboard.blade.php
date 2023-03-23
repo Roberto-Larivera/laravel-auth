@@ -47,8 +47,6 @@
             </div>
             
         </div>
-        <img class="w-25" src="/storage/test/io.jpeg" alt="io">
-        <img class="w-25" src="{{ asset('/storage/test/io.jpeg') }}" alt="io">
     </div>
 </div>
 @endsection

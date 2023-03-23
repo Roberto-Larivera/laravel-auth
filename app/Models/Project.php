@@ -14,7 +14,8 @@ class Project extends Model
         'slug',
         'name_repo',
         'link_repo',
-        'img_repo',
-        'description'
+        'featured_image',
+        'description',
+        'publish'
     ];
 }

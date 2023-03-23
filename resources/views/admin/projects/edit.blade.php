@@ -71,7 +71,14 @@
                     </div>
 
                     @if (isset($project->featured_image))
-                        <div class="w-25">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="delete_">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Image Deletion
+                            </label>
+                        </div>
+
+                        <div class="w-25 mb-3">
                             <img src="{{ asset('storage/' . $project->featured_image) }}" class="img-fluid rounded-start"
                                 alt="...">
                         </div>
@@ -88,12 +95,12 @@
                     </div>
                     <div class="mb-5">
                         <p>
-                            I campi contrassegnati con <span class="text-danger fw-bold">*</span> sono <span
-                                class="text-danger fw-bold">obbligatori</span>
+                            Fields marked with <span class="text-danger fw-bold">*</span> are <span
+                                class="text-danger fw-bold">mandatory</span>
                         </p>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-success mb-3">Conferma</button>
+                        <button type="submit" class="btn btn-success mb-3">Confirm</button>
                     </div>
                 </form>
             </div>

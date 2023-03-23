@@ -26,9 +26,13 @@
             <div class="col">
                 <div class="card">
                     <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="{{ $project->img_repo }}" class="img-fluid rounded-start" alt="...">
-                        </div>
+                        {{-- verifica se c'è l'immagine --}}
+                        @if (isset($project->featured_image))
+                            <div class="col-md-4">
+                                <img src="{{ asset('storage/' . $project->featured_image) }}" class="img-fluid rounded-start"
+                                    alt="...">
+                            </div>
+                        @endif
                         <div class="col-md-8">
                             <div class="card-body h-100">
                                 <h5 class="card-title">Titolo: {{ $project->title }}</h5>

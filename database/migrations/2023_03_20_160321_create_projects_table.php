@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('slug',98)->unique();
             $table->string('name_repo',98)->unique();
             $table->string('link_repo');
-            $table->string('img_repo')->nullable();
+            $table->string('featured_image')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('publish')->nullable()->default(true);
 
             $table->timestamps();
         });

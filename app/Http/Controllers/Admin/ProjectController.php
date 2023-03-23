@@ -252,6 +252,10 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //$project = Project::findOrFail($project);
+        if ($project->featured_image) {
+            // Controllo se ce un immagine vecchia è la cancello
+            Storage::delete($project->featured_image);
+        }
         $project->delete($project);
         return redirect()->route('admin.projects.index')->with('success', 'Il Progetto è stato eliminato con successo');
     }

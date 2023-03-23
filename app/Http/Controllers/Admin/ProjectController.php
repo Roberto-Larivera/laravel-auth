@@ -36,9 +36,9 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
         // metodo 1
-            return view('admin.projects.index',[
-                'projects' => $projects
-            ]);
+        return view('admin.projects.index', [
+            'projects' => $projects
+        ]);
         // metodo 2
         //return view('admin.projects.index',compact('projects'));
     }
@@ -83,7 +83,7 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
-        if(array_key_exists('featured_image', $data)){
+        if (array_key_exists('featured_image', $data)) {
             $imgPath = Storage::put('projects', $data['featured_image']);
             $data['featured_image'] = $imgPath;
         }
@@ -94,16 +94,16 @@ class ProjectController extends Controller
         $existSlug = Project::where('slug', $data['slug'])->first();
 
         $counter = 1;
-        $dataSlug =$data['slug'];
+        $dataSlug = $data['slug'];
 
         // Aggiungere la possibilità di rimuovere gli spazzi se ci sono e inserire dei trattini, name-repo
-        
+
         // questa funzione controlla se lo slag esiste già nel database, e in caso esista con questo ciclo while li viene inserito un numero di continuazione 
-        while($existSlug){
-            if(strlen($data['slug']) >= 95){
+        while ($existSlug) {
+            if (strlen($data['slug']) >= 95) {
                 substr($data['slug'], 0, strlen($data['slug']) - 3);
             }
-            $data['slug'] = $dataSlug.'-'.$counter;
+            $data['slug'] = $dataSlug . '-' . $counter;
             $counter++;
             $existSlug = Project::where('slug', $data['slug'])->first();
         }
@@ -126,7 +126,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show',compact('project'));
+        return view('admin.projects.show', compact('project'));
     }
 
 
@@ -147,7 +147,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit',compact('project'));
+        return view('admin.projects.edit', compact('project'));
     }
 
 
@@ -172,48 +172,71 @@ class ProjectController extends Controller
         $titleOld =  $project->title;
         $name_repoOld =  $project->name_repo;
         $link_repoOld =  $project->link_repo;
-        $img_repoOld =  $project->img_repo;
+        $featured_imageOld =  $project->featured_image;
         $descriptionOld =  $project->description;
-        
+        $featuredDeleteImage = false;
+
         $data = $request->validated();
 
+        if(array_key_exists('delete_featured_image', $data) || array_key_exists('featured_image', $data) ){
+            $featuredDeleteImage = true;
+        }
+
         
-        if(
+        if (
             $titleOld ==  $data['title'] &&
             $name_repoOld ==  $data['name_repo'] &&
             $link_repoOld ==  $data['link_repo'] &&
-            $img_repoOld ==  $data['img_repo'] &&
-            $descriptionOld ==  $data['description']
-        ){
+            $descriptionOld ==  $data['description'] &&
+            $featuredDeleteImage == false 
+        ) {
             return redirect()->route('admin.projects.edit', $project->id)->with('warning', 'Non hai modificato nessun dato');
-        }else{
-            if($titleOld != $data['title']){
-            
+        } else {
+            // controllo titolo se è uguale a quello già esistente
+            if ($titleOld != $data['title']) {
+
                 $data['slug'] = Str::slug($data['title']);
                 $existSlug = Project::where('slug', $data['slug'])->first();
-                
+
                 $counter = 1;
-                $dataSlug =$data['slug'];
-                
+                $dataSlug = $data['slug'];
+
                 // Aggiungere la possibilità di rimuovere gli spazzi se ci sono e inserire dei trattini, name-repo
-                
+
                 // questa funzione controlla se lo slag esiste già nel database, e in caso esista con questo ciclo while li viene inserito un numero di continuazione 
-                while($existSlug){
-                    if(strlen($data['slug']) >= 95){
+                while ($existSlug) {
+                    if (strlen($data['slug']) >= 95) {
                         substr($data['slug'], 0, strlen($data['slug']) - 3);
                     }
-                    $data['slug'] = $dataSlug.'-'.$counter;
+                    $data['slug'] = $dataSlug . '-' . $counter;
                     $counter++;
                     $existSlug = Project::where('slug', $data['slug'])->first();
                 }
                 
             }
-    
+
+            // controllo se esiste la key img -- 2 controllo 
+            if(array_key_exists('delete_featured_image', $data)){
+                if ($featured_imageOld) {
+                    // Controllo se ce un immagine vecchia è la cancello
+                    Storage::delete($featured_imageOld);
+
+                    $project->featured_image = null;
+                    $project->save();
+                }
+            }else if (array_key_exists('featured_image', $data)) {
+                    $imgPath = Storage::put('projects', $data['featured_image']);
+                    $data['featured_image'] = $imgPath;
+                    if ($featured_imageOld) {
+                        // Controllo se ce un immagine vecchia è la cancello
+                        Storage::delete($featured_imageOld);
+                    }
+                }
+            
+
             $project->update($data);
             return redirect()->route('admin.projects.show', $project)->with('success', 'Progetto aggiornato con successo');
-            
         }
-        
     }
 
 
@@ -231,6 +254,5 @@ class ProjectController extends Controller
         //$project = Project::findOrFail($project);
         $project->delete($project);
         return redirect()->route('admin.projects.index')->with('success', 'Il Progetto è stato eliminato con successo');
-
     }
 }

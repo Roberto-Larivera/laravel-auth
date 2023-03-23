@@ -174,17 +174,21 @@ class ProjectController extends Controller
         $link_repoOld =  $project->link_repo;
         $featured_imageOld =  $project->featured_image;
         $descriptionOld =  $project->description;
+        $featuredDeleteImage = false;
 
         $data = $request->validated();
 
+        if(array_key_exists('delete_featured_image', $data) || array_key_exists('featured_image', $data) ){
+            $featuredDeleteImage = true;
+        }
 
         
         if (
             $titleOld ==  $data['title'] &&
             $name_repoOld ==  $data['name_repo'] &&
             $link_repoOld ==  $data['link_repo'] &&
-            !array_key_exists('featured_image', $data) &&
-            $descriptionOld ==  $data['description']
+            $descriptionOld ==  $data['description'] &&
+            $featuredDeleteImage == false 
         ) {
             return redirect()->route('admin.projects.edit', $project->id)->with('warning', 'Non hai modificato nessun dato');
         } else {
@@ -212,14 +216,23 @@ class ProjectController extends Controller
             }
 
             // controllo se esiste la key img -- 2 controllo 
-            if (array_key_exists('featured_image', $data)) {
-                $imgPath = Storage::put('projects', $data['featured_image']);
-                $data['featured_image'] = $imgPath;
+            if(array_key_exists('delete_featured_image', $data)){
                 if ($featured_imageOld) {
                     // Controllo se ce un immagine vecchia è la cancello
                     Storage::delete($featured_imageOld);
+
+                    $project->featured_image = null;
+                    $project->save();
                 }
-            }
+            }else if (array_key_exists('featured_image', $data)) {
+                    $imgPath = Storage::put('projects', $data['featured_image']);
+                    $data['featured_image'] = $imgPath;
+                    if ($featured_imageOld) {
+                        // Controllo se ce un immagine vecchia è la cancello
+                        Storage::delete($featured_imageOld);
+                    }
+                }
+            
 
             $project->update($data);
             return redirect()->route('admin.projects.show', $project)->with('success', 'Progetto aggiornato con successo');

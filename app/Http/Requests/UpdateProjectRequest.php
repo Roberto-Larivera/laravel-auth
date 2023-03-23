@@ -36,6 +36,7 @@ class UpdateProjectRequest extends FormRequest
             'link_repo' => 'required|max:255',
             'description' => 'nullable|max:4096',
             'featured_image' => 'nullable|image|max:2048',
+            'delete_featured_image' => 'nullable',
         ];
     }
 }

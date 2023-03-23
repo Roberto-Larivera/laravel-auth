@@ -72,8 +72,8 @@
 
                     @if (isset($project->featured_image))
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" value="" id="delete_">
-                            <label class="form-check-label" for="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="delete_featured_image" id="delete_featured_image">
+                            <label class="form-check-label" for="delete_featured_image">
                                 Image Deletion
                             </label>
                         </div>

@@ -13,7 +13,9 @@
             @foreach ($projects as $project)
                 <div class="col">
                     <div class="card h-100" style="width: 18rem;">
-                        <img src="{{ $project->img_repo }}" class="card-img-top" alt="...">
+                        @if (isset($project->featured_image))
+                        <img src="{{ asset('storage/'.$project->featured_image) }}" class="card-img-top" alt="...">
+                        @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $project->title }}</h5>
                             <p class="card-text text-truncate">{{ $project->description }}</p>

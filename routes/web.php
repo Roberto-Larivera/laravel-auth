@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\Admin\ProjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,10 +16,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::name('guest.')->group(function (){
 
-Route::get('/', function () {
-    return view('welcome');
+    Route::get('/', [GuestController::class, 'index'])->name('home');
+    Route::get('/projects', [GuestController::class, 'projects'])->name('projects');
 });
+
+// Route::get('/', function () {
+//     return view('welcome')->name('home');
+// });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function (){
     Route::get('/dashboard', [PageController::class, 'dashboard'] )->name('dashboard');

@@ -34,8 +34,8 @@ class UpdateProjectRequest extends FormRequest
                 'max:98'
             ],
             'link_repo' => 'required|max:255',
-            'img_repo' => 'nullable|max:255',
             'description' => 'nullable|max:4096',
+            'featured_image' => 'nullable|image|max:2048',
         ];
     }
 }

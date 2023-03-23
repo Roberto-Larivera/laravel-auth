@@ -172,7 +172,7 @@ class ProjectController extends Controller
         $titleOld =  $project->title;
         $name_repoOld =  $project->name_repo;
         $link_repoOld =  $project->link_repo;
-        $img_repoOld =  $project->img_repo;
+        $featured_imageOld =  $project->featured_image;
         $descriptionOld =  $project->description;
         
         $data = $request->validated();
@@ -182,7 +182,7 @@ class ProjectController extends Controller
             $titleOld ==  $data['title'] &&
             $name_repoOld ==  $data['name_repo'] &&
             $link_repoOld ==  $data['link_repo'] &&
-            $img_repoOld ==  $data['img_repo'] &&
+            $featured_imageOld ==  $data['featured_image'] &&
             $descriptionOld ==  $data['description']
         ){
             return redirect()->route('admin.projects.edit', $project->id)->with('warning', 'Non hai modificato nessun dato');
@@ -207,6 +207,14 @@ class ProjectController extends Controller
                     $existSlug = Project::where('slug', $data['slug'])->first();
                 }
                 
+            }
+            if(array_key_exists('featured_image', $data)){
+                $imgPath = Storage::put('projects', $data['featured_image']);
+                $data['featured_image'] = $imgPath;
+                if($featured_imageOld){
+                    // Controllo se ce un immagine vecchia è la cancello
+                    Storage::delete($featured_imageOld);
+                }
             }
     
             $project->update($data);

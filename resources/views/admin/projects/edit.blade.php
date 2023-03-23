@@ -13,27 +13,28 @@
                     Torna Indietro
                     <i class="fa-solid fa-rotate-left"></i>
                 </a>
-                <a href="{{ route('admin.projects.show', $project->id) }}"
-                    class="btn btn-outline-primary">
+                <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-outline-primary">
                     <i class="fa-solid fa-eye"></i>
                 </a>
                 @include('admin.projects.partials.delete')
             </div>
         </div>
-       @include('admin.projects.partials.warning')
-       @include('admin.projects.partials.success')
-       @include('admin.projects.partials.errors')
+        @include('admin.projects.partials.warning')
+        @include('admin.projects.partials.success')
+        @include('admin.projects.partials.errors')
         <div class="row">
             <div class="col">
 
-                <form action="{{ route('admin.projects.update', $project) }}" method="POST">
+                <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
                     <div class="mb-3">
-                        <label for="title" class="form-label  @error('title') text-danger @enderror ">Title <span class="text-danger fw-bold">*</span></label>
+                        <label for="title" class="form-label  @error('title') text-danger @enderror ">Title <span
+                                class="text-danger fw-bold">*</span></label>
                         <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
-                            name="title" placeholder="Example Title" maxlength="98" value="{{ old('title')?? $project->title }}" required>
+                            name="title" placeholder="Example Title" maxlength="98"
+                            value="{{ old('title') ?? $project->title }}" required>
                         @error('title')
                             <p class="text-danger fw-bold">{{ $message }}</p>
                         @enderror
@@ -42,7 +43,8 @@
                         <label for="name_repo" class="form-label  @error('name_repo') text-danger @enderror">Name
                             Repo <span class="text-danger fw-bold">*</span></label>
                         <input type="text" class="form-control @error('name_repo') is-invalid @enderror" id="name_repo"
-                            name="name_repo" placeholder="example-name-repo" maxlength="98" value="{{ old('name_repo')?? $project->name_repo  }}" required>
+                            name="name_repo" placeholder="example-name-repo" maxlength="98"
+                            value="{{ old('name_repo') ?? $project->name_repo }}" required>
                         @error('name_repo')
                             <p class="text-danger fw-bold">{{ $message }}</p>
                         @enderror
@@ -51,32 +53,43 @@
                         <label for="link_repo" class="form-label  @error('link_repo') text-danger @enderror">Link
                             Repo <span class="text-danger fw-bold">*</span></label>
                         <input type="text" class="form-control @error('link_repo') is-invalid @enderror" id="link_repo"
-                            name="link_repo" placeholder="https://github.com/Example-link/name-repo" maxlength="255" value="{{ old('link_repo')?? $project->link_repo  }}"
-                            required>
+                            name="link_repo" placeholder="https://github.com/Example-link/name-repo" maxlength="255"
+                            value="{{ old('link_repo') ?? $project->link_repo }}" required>
                         @error('link_repo')
                             <p class="text-danger fw-bold">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="img_repo" class="form-label  @error('img_repo') text-danger @enderror">Img Repo</label>
-                        <input type="text" class="form-control @error('img_repo') is-invalid @enderror" id="img_repo"
-                            name="img_repo" placeholder="https://placehold.co/example" maxlength="255" value="{{ old('img_repo')?? $project->img_repo }}">
-                        @error('img_repo')
+                        <label for="featured_image"
+                            class="form-label  @error('featured_image') text-danger @enderror">Featured Image</label>
+                        <input type="file" class="form-control @error('featured_image') is-invalid @enderror"
+                            id="featured_image" name="featured_image" {{-- validazione frontend da aggiungere --}} {{-- si usa per i file --}}
+                            accept="image/*">
+                        @error('featured_image')
                             <p class="text-danger fw-bold">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    @if (isset($project->featured_image))
+                        <div class="w-25">
+                            <img src="{{ asset('storage/' . $project->featured_image) }}" class="img-fluid rounded-start"
+                                alt="...">
+                        </div>
+                    @endif
+
                     <div class="mb-3">
                         <label for="description"
                             class="form-label  @error('description') text-danger @enderror">Description</label>
                         <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
-                            placeholder="Lorem ipsum dolor sit amet ..." rows="3" maxlength="4096"> {{ old('description')?? $project->description  }}</textarea>
+                            placeholder="Lorem ipsum dolor sit amet ..." rows="3" maxlength="4096"> {{ old('description') ?? $project->description }}</textarea>
                         @error('description')
                             <p class="text-danger fw-bold">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-5">
                         <p>
-                            I campi contrassegnati con <span class="text-danger fw-bold">*</span> sono <span class="text-danger fw-bold">obbligatori</span>
+                            I campi contrassegnati con <span class="text-danger fw-bold">*</span> sono <span
+                                class="text-danger fw-bold">obbligatori</span>
                         </p>
                     </div>
                     <div>

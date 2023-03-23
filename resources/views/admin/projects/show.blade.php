@@ -28,10 +28,10 @@
                     <div class="row g-0">
                         {{-- verifica se c'è l'immagine --}}
                         @if (isset($project->featured_image))
-                            
-                        <div class="col-md-4">
-                            <img src="{{ asset('storage/'.$project->featured_image) }}" class="img-fluid rounded-start" alt="...">
-                        </div>
+                            <div class="col-md-4">
+                                <img src="{{ asset('storage/' . $project->featured_image) }}" class="img-fluid rounded-start"
+                                    alt="...">
+                            </div>
                         @endif
                         <div class="col-md-8">
                             <div class="card-body h-100">

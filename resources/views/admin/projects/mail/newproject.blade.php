@@ -24,6 +24,7 @@
         }
 
         main {
+            margin: 30px 0;
             width: 100%;
             color: white;
 
@@ -53,6 +54,8 @@
 
         .box-content a.github {
             text-decoration: none;
+            font-weight: bold;
+
             color: white;
             padding: 15px;
             background-color: black;
@@ -72,9 +75,10 @@
 
         .box-content a.button {
             text-decoration: none;
-            color: white;
+            font-weight: bold;
+            color: black;
             padding: 15px;
-            background-color: lightcoral;
+            background-color: white;
             border-radius: 15px;
             margin: 10px;
         }
@@ -86,6 +90,7 @@
 
         .firma {
             color: #09AAA2;
+            font-weight: bold;
         }
 
         /* ------  */
@@ -97,6 +102,9 @@
         .margin-5 {
             margin-top: 50px;
             margin-bottom: 50px;
+        }
+        .margin-5-t {
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -112,19 +120,18 @@
                         Nuovo Progetto Pubblicato!
                     </h1>
                     <h3>
-                        Hai publicato con successo ....
+                        Hai publicato con successo <span style="font-size: 23px ">' {{ $project->title }} '</span>
                     </h3>
 
                     <div class="margin-3">
-                        <a class="github" href="#nogo">
-                            example-template
+                        <a class="github" href="{{ $project->link_repo }}">
+                            {{ $project->name_repo }}
                         </a>
                     </div>
 
                     <div class="description margin-3">
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non suscipit distinctio officiis
-                            obcaecati nisi maxime.
+                            {!! nl2br($project->description)!!}
                         </p>
                     </div>
                     {{-- img... --}}
@@ -135,13 +142,13 @@
                         {{-- <a href="{{ route('admin.projects.show',$project->id) }}">
                         Vedi tutti i post!
                     </a> --}}
-                        <a class="button" href="{{ route('admin.projects.index') }}">
+                        <a class="button" href="{{ route('admin.projects.show',$project->id) }}">
                             Vedi il progetto!
                         </a>
                     </div>
 
                 </div>
-                <div class="firma margin-5">
+                <div class="firma margin-5-t">
                     <p>
                         Larivera Roberto | Bollfolio
                     </p>

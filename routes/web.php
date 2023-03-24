@@ -20,6 +20,7 @@ Route::name('guest.')->group(function (){
 
     Route::get('/', [GuestController::class, 'index'])->name('home');
     Route::get('/projects', [GuestController::class, 'projects'])->name('projects');
+    Route::get('/test', function(){return view('admin.projects.mail.newproject');})->name('projects');
 });
 
 // Route::get('/', function () {

@@ -20,7 +20,7 @@
             <p>Slug: {{ $project->slug }}</p>
             <p>Nome Repo: {{ $project->name_repo }}</p>
             <p>Link Repo: {{ $project->link_repo }}</p>
-            <p>Descrizione: {{ $project->description }}</p>
+            <p>Descrizione: {!! nl2br($project->description) !!}</p>
         </div>
         {{-- @endif --}}
     </div>

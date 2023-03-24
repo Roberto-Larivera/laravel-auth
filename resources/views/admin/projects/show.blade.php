@@ -39,7 +39,7 @@
                                 <p class="card-text">Slug: {{ $project->slug }}</p>
                                 <p class="card-text">Nome Repo: {{ $project->name_repo }}</p>
                                 <p class="card-text">Link Repo: {{ $project->link_repo }}</p>
-                                <p class="card-text">Descrizione: {{ $project->description }}</p>
+                                <p class="card-text">Descrizione: {!! nl2br($project->description)!!}</p>
                             </div>
                         </div>
                     </div>
